@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my_ds_tools"
+version = "0.1.0"
+description = "My personal kit for Data Science"
+authors = [{name = "Andrea Palazzo", email = "andreapalazzo99@gmail.com"}]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "seaborn",
+    "plotly",
+    "scipy",
+    "statsmodels",
+    "scikit-learn",       
+    "xgboost",            
+    "lightgbm",           
+    "catboost",           
+    "kagglehub",        
+    "joblib",             
+    "tqdm",               
+    "shap",               
+    "imbalanced-learn"
+]
+
+
+[project.urls]
+"Homepage" = "https://github.com/achinisacciu/my_ds_tools"
