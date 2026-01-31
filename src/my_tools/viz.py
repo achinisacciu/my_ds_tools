@@ -1,3 +1,8 @@
+"""
+Visualization Module
+Imports and configures Matplotlib, Seaborn, and Plotly with the custom design system.
+"""
+
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import seaborn as sns
@@ -7,23 +12,21 @@ import plotly.figure_factory as ff
 from plotly.subplots import make_subplots
 import plotly.io as pio
 
-# Import the theme configuration
-from .theme import COLOR_PALETTE, PALETTE_CATEGORICAL, FONTS
+# Import theme variables relative to the package
+from .theme import COLOR_PALETTE, PALETTE_BINARY, PALETTE_CATEGORICAL, FONTS
 
 # ==============================================================================
-# PLOTLY CONFIGURATION (Global)
+# PLOTLY CONFIGURATION (Auto-applied on import)
 # ==============================================================================
-# Create a custom Plotly template based on your design system
+# Define custom template based on the design system
 pio.templates["my_custom_theme"] = go.layout.Template(
     layout=go.Layout(
-        colorway=PALETTE_CATEGORICAL,  # Set default colors for lines/bars
+        colorway=PALETTE_CATEGORICAL,
         font=dict(
-            family=FONTS['family'].split(',')[0], # Take just 'Arial'
+            family=FONTS['family'].split(',')[0],
             color=COLOR_PALETTE['text_primary']
         ),
-        title=dict(
-            font=dict(size=FONTS['title_size'])
-        ),
+        title=dict(font=dict(size=FONTS['title_size'])),
         paper_bgcolor=COLOR_PALETTE['background'],
         plot_bgcolor=COLOR_PALETTE['background'],
         xaxis=dict(gridcolor=COLOR_PALETTE['grid_color']),
@@ -31,12 +34,13 @@ pio.templates["my_custom_theme"] = go.layout.Template(
     )
 )
 
-# Set it as default
+# Set as default
 pio.templates.default = "my_custom_theme"
 
 # ==============================================================================
-# MATPLOTLIB / SEABORN CONFIGURATION (Global)
+# MATPLOTLIB / SEABORN CONFIGURATION (Auto-applied on import)
 # ==============================================================================
+# Update global matplotlib params
 plt.rcParams.update({
     'font.family': 'sans-serif',
     'font.sans-serif': [FONTS['family'].split(',')[0]],
@@ -52,12 +56,17 @@ plt.rcParams.update({
     'ytick.color': COLOR_PALETTE['text_primary']
 })
 
+# Update seaborn palette
 sns.set_palette(sns.color_palette(PALETTE_CATEGORICAL))
 
-
-# Export libraries + theme variables (so you can access colors manually if needed)
+# ==============================================================================
+# EXPORT
+# ==============================================================================
 __all__ = [
+    # Visualization Libraries
     'plt', 'ListedColormap', 'sns',
     'px', 'go', 'ff', 'make_subplots', 'pio',
+    
+    # Theme Variables (Must be listed here to be available via 'from viz import *')
     'COLOR_PALETTE', 'PALETTE_BINARY', 'PALETTE_CATEGORICAL', 'FONTS'
 ]
